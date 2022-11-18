@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <title>review</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/task.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    body{
+        text-align: center;
+        display: block;
+        background-color: blue;
+
+    }
+    .fa{
+font-size: 20px;
+transition: all 0.2s ease;
+position:relative;
+padding: 10px;
+    }
+    #radio input{
+        display: none;
+    }
+    label{
+        
+        float: right;
+        text-align: center;
+        margin: 1px 40px 1px 1px;
+        transition: all 0.2s ease;
+    }
+    input:not(:checked)~label:hover,
+   input:not(:checked)~label:hover ~label{
+        color: aqua;
+    } 
+
+    input:checked~label{
+        color: aqua;
+    }
+   
+    input#rate-1:checked~label{
+        color:yellow;
+        content:"i don't like this";
+    }
+   
+    #email{
+        padding: 20px 222px 20px 9px;
+    }
+    
+    #radio input#rate-1:checked~ form header:before{
+        display: block;
+        
+       
+    }
+    input:checked~ form header::before{
+        content:"i don't like this";
+        
+       
+    }
+
+    form header{
+        font-family: 'poppins', Times, serif;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    transition: all 0.2s ease;
+    }
+    .result{
+        display: none;
+    }
+input#rate1~.result{
+    display: block;
+}
+    input#rate1~.result{
+        content:"i dont";
+    }
+    #two,#three,#four,#five,#six{
+        display: none;
+    }
+</style>
+<body>
+   
+    <form>
+        
+       
+        <header id="header">
+            
+                worst
+              
+            
+        </header><br>
+        <h3 id="value" value="0"></h3>
+        
+        <div id="radio">
+            <input id="rate-1" onclick="rate1()" type="radio" name="rate" >
+            <label for="rate-1" class="fa fa-star" ></label>
+            <input id="rate-2" onclick="rate2()" type="radio" name="rate">
+            <label for="rate-2"  class="fa fa-star"></label>
+            <input id="rate-3" onclick="rate3()" type="radio" name="rate">
+            <label for="rate-3" class="fa fa-star"></label>
+            <input id="rate-4" onclick="rate4()" type="radio" name="rate">
+            <label for="rate-4" class="fa fa-star"></label>
+            <input id="rate-5" onclick="rate5()" type="radio" name="rate">
+            <label for="rate-5" class="fa fa-star"></label>
+            <span class="result">hello</span><br>
+            </div><br><br><br> 
+            <input id="email1" type="name" name="reviewer" placeholder="your name" required><br><br>
+        <input id="email" type="message" name="description" placeholder="your comment" required ><br><br>
+       
+        <button onclick="signup()">review</button>
+        
+    </form>
+   
+    <script>
+        function rate5(){
+          
+document.getElementById("header").innerHTML=("i hate it");
+document.getElementById("value").value=1;
+        }
+        function rate4(){
+            
+            document.getElementById("header").innerHTML=("i don't like it");
+            document.getElementById("value").value=2;
+        }
+        function rate3(){
+           
+            document.getElementById("header").innerHTML=("i like it");
+            document.getElementById("value").value=3;
+        }
+        function rate2(){
+           
+            document.getElementById("header").innerHTML=("i use it");
+            document.getElementById("value").value=4;
+        }
+        function rate1(){
+           
+            document.getElementById("header").innerHTML=("i love it");
+            document.getElementById("value").value=5;
+        }
+    var id=0;
+       function signup() {
+           id++;
+           
+           
+           const description = document.getElementById("email").value;
+           const starrating=document.getElementById("value").value;
+           const reviewer=document.getElementById("email1").value
+           const name = {description:description,id:id,starrating:starrating,reviewer:reviewer};
+           event.preventDefault();
+           console.log(name);
+          
+   fetch("http://localhost:8080/product-user", {
+
+                               method: "POST",
+                               body: JSON.stringify(name),
+                               headers: {
+                                   "Access-Control-Allow-Origin": "*",
+                                   "Content-Type": "application/json",
+                               },
+                           }).then((Response) => Response.text()
+                           )
+                               .then((e) => {
+                                  
+                                    console.log(e); window.alert(e);
+                                   }) 
+                                
+                                
+                               
+                               }
+                               </script>
+</body>
+</html>

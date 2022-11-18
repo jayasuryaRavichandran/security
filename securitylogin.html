@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <title>sign in</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/task.css'>
+
+</head>
+
+<body>
+    <form >
+        <nav>
+            <a class="a1" href="./security.html">SIGN UP</a>
+            <a class="a2" href="./securitylogin.html">LOG IN</a>
+
+        </nav><br>
+        <h3 id="login">Sign in </h3><br>
+        <h3 id="reset" style="display:none;">forget password </h3><br>
+        <input id="email" type="email" name="email" placeholder="Email Address*" required><br><br><br>
+        <input id="email1" type="password" name="password" placeholder="Set A Password *" required><br><br><br>
+        <input id="email2" type="password" name="pwd " placeholder="confirm the new password*" ><br><br><br>
+        <input id="sign" onsubmit="signup()" type="submit" name="sign in" value="GET   STARTED"><br><br>
+<button id="forget" onclick="myfunction()">forget password</button><br>
+<button id="sign1" onclick="forgets()" style="display:none">change</button>
+    </form>
+    <script>
+
+        function signup() {
+
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("email1").value;
+            const name = { email: email, password:password };
+            event.preventDefault();
+            console.log(name);
+
+            fetch("http://localhost:8080/get-User", {
+                method: "GET",
+
+            }).then((Response) => {
+                return Response.json() }
+            )
+
+                .then((t) => {
+                    let value=0;
+                    for (let index = 0; index < t.length; index++) {
+                        if (email==t[index].email) {
+                            if(password==t[index].password){
+                                console.log("login sucess");
+                                alert("log in sucess");
+                                window.location.href = "http://127.0.0.1:5500/securitytable.html";
+                                break;
+                            }
+                            else{
+                                console.log("wrong password");
+                                alert("wrong password");
+                                break;
+                            }
+                        }
+                        value++;
+                        if(t.length==value){
+                            console.log("unknown person");
+                            alert("unknown person");
+                        }
+                    }
+                })
+
+        }
+        function myfunction(){
+            document.getElementById("forget").style.display='none';
+            document.getElementById("sign1").style.display='block';
+            document.getElementById("email2").style.display='block';
+            document.getElementById("sign").style.display='none';
+            document.getElementById("login").style.display='none';
+            document.getElementById("reset").style.display='block';
+            event.preventDefault();
+        }
+        function forgets() {
+           
+           
+           
+           const email = document.getElementById("email").value;
+           const password = document.getElementById("email1").value;
+           const confirm =document.getElementById("email2").value
+           const name = {email:email, password: password, confirm:confirm};
+           event.preventDefault();
+           console.log(name);
+             if(password==confirm){
+   fetch("http://localhost:8080/forget-user", {
+
+                               method: "POST",
+                               body: JSON.stringify(name),
+                               headers: {
+                                   "Access-Control-Allow-Origin": "*",
+                                   "Content-Type": "application/json",
+                               },
+                           }).then((Response) => Response.text()
+                           )
+                               .then((e) => {
+                                  
+                                    console.log(e); window.alert(e);
+                                   }) 
+                                   document.getElementById("forget").style.display='revert';
+            document.getElementById("sign1").style.display='none';
+            document.getElementById("email2").style.display='revert';
+            document.getElementById("sign").style.display='revert';
+            document.getElementById("login").style.display='revert';
+            document.getElementById("reset").style.display='revert';
+                                }
+                                else{
+                                    console.log ("given same password on both new and confirm");
+                                    alert("given same password on both new and confirm");
+                                }
+                               
+                               }
+        </script>
+        <style>
+            #forget{
+    color: white;
+
+                text-align: center;
+                padding: 6px 142px 6px 158px;
+    background-color: mediumseagreen;
+            }
+            #email2{
+                display:none;
+            }
+           #sign1{
+                padding: 10px 171px 10px 156px;
+    color: white;
+    background-color: mediumseagreen !important;
+    font-size: 18px;
+    font-weight: bolder;
+}
+            
+        </style>
+</body >
+</html >

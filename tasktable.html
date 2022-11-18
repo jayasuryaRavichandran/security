@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+
+</head>
+
+<body>
+    <nav>
+        <a class="a1" href="./security.html">SIGN UP</a>
+        <a class="a2" href="./securitylogin.html">LOG IN</a>
+    </nav>
+
+
+    <h1>List of Users</h1>
+
+    <form id="form" style="display: none;">
+
+        
+        <input id="input" type="name" placeholder="First name*"><br><br>
+        <input id="input1" type="name" placeholder="Last name*"><br><br>
+        <input id="email" type="email" placeholder="Email address* "><br><br>
+        <input id="email1" type="password" placeholder="set a password*"><br><br>
+        <input id="sign" onclick="signup()" type="submit"><br><br>
+        
+
+    </form>
+    
+    <button id="addrow" onclick="Addrow()">add</button>
+    
+
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>E-mail</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>password</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody id="table">
+
+        </tbody>
+    </table>
+
+
+    <script>
+       function get(){
+    
+            fetch(`http://localhost:8080/get-User`, {
+                method: "GET",
+
+            }).then((Response) => {
+                return Response.json()
+            }
+            )
+                .then((u) => {
+                    let tabledata = "";
+                    for (let index = 0; index < u.length; index++) {
+                        tabledata += `
+                 <tr>
+                    <td>${u[index].id}</td>
+            <td>${u[index].email}</td>
+            <td>${u[index].firstname}</td>
+            <td>${u[index].lastname}</td>
+            
+            <td>${u[index].password}</td>
+            <td><button onclick="deleterow(${u[index].id})">delete</button><br>
+                <button  onclick="updaterow(${u[index].id})";update="${u[index].id}">update</button><td>
+         </tr>
+         `;   };
+                    document.getElementById("table").innerHTML = tabledata;
+                });
+            }
+                const updaterow=(id)=>{
+                    document.getElementById("form").style.display = "block";
+                }
+
+        function signup() {
+console.log(update);
+
+
+            
+
+            const firstname = document.getElementById("input").value;
+            const lastname = document.getElementById("input1").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("email1").value;
+            const name = { firstname: firstname, lastname, email, password: password,id:update };
+            event.preventDefault();
+            console.log(name);
+
+
+            fetch(`http://localhost:8080/update-user?id=${id}`, {
+                method: "PUT",
+                body: JSON.stringify(name),
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                },
+            }).then((Response) =>{Response.text()}
+
+                
+            )
+                .then((e) => { console.log(e); window.alert("updated"); get() })
+            document.getElementById("form").style.display = "none";
+            document.getElementById("addrow").style.display = "revert";
+           
+        }
+
+        get();
+    
+        function Addrow(){
+        fetch("http://localhost:8080/get-User", {
+                method: "GET",
+
+            }).then((Response) => {
+                return Response.json()
+            }
+            ).then((e) => {
+                    for (let index = 0; index < e.length; index++) {
+                        console.log(e[index].email);
+                        
+                        if (email == e[index].email) {
+                           
+                            console.log("email is no exist");
+                            alert("email is no exist");
+                            window.location.href = "http://127.0.0.1:5500/security.html";
+                           break; 
+                        } 
+                        break;
+                    }
+                    
+                     
+                if ("email"){
+                   
+                            fetch("http://localhost:8080/add-User", {
+
+                                method: "POST",
+                                body: JSON.stringify(name),
+                                headers: {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json",
+                                },
+                            }).then((Response) => Response.text()
+                            )
+                                .then((e) => {
+                                   
+                                     console.log(e); window.alert(e);
+                                    }) 
+                                
+                }
+            })
+        }
+        
+           
+            
+        
+   </script>
+</body>
+</html>

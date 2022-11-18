@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <title>sign in</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/task.css'>
+
+</head>
+
+<body>
+    <form onsubmit="signup()">
+        <nav>
+            <a class="a1" href="./task.html">SIGN UP</a>
+            <a class="a2" href="./tasklogin.html">LOG IN</a>
+
+        </nav><br>
+        <h3>Sign in </h3><br>
+        <input id="email" type="email" name="email " placeholder="Email Address*" required><br><br><br>
+        <input id="email1" type="password" name="pwd " placeholder="Set A Password *" required><br><br><br>
+        <input id="sign" type="submit" name="sign in" value="GET   STARTED">
+
+    </form>
+    <script>
+
+        function signup() {
+
+
+            const email = document.getElementById("email").value;
+            const pwd = document.getElementById("email1").value;
+            const name = { email: email,pwd:pwd };
+            event.preventDefault();
+            console.log(name);
+
+            fetch("http://localhost:8080/get-user", {
+                method: "GET",
+
+            }).then((Response) => {
+                return Response.json() }
+            )
+
+                .then((t) => {
+                    let value=0;
+                    for (let index = 0; index < t.length; index++) {
+                        if (email==t[index].email) {
+                            if(pwd==t[index].pwd){
+                                console.log("login sucess");
+                                alert("log in sucess")
+                                break;
+                            }
+                            else{
+                                console.log("wrong password");
+                                alert("wrong password");
+                                break;
+                            }
+                        }
+                        value++;
+                        if(t.length==value){
+                            console.log("unknown person");
+                            alert("unknown person");
+                        }
+                    }
+                })
+        }
+        </script>
+</body >
+</html >

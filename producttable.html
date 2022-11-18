@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style>
+    .fa{
+font-size: 20px;
+transition: all 0.2s ease;
+position:relative;
+padding: 10px;
+    }
+   .fa fa-star checked{
+color: yellow;
+    }
+    .card{
+        display: flex;
+    box-shadow: 8px 4px 8px 0 rgb(0 0 0 / 20%);
+    transition: 0.3s;
+    /* width: 40%; */
+    border-radius: 5px;
+    border: 1 px 10px 1px 1px;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    width: 213px;
+    height: 243px;
+    margin: 1px 62px 61px 339px;
+}
+
+    
+    /* #radio input{
+        display: none;
+    }
+    span{
+        transition: all 0.2s ease;
+        
+        text-align: center;
+        margin: 1px 3px 1px 1px;
+    }
+    span:not(:checked)~span:hover,
+   span:not(:checked)~span:hover ~span{
+        color: aqua;
+    } 
+
+    :checked~span{
+        color: aqua;
+    }
+   
+    :checked~span{
+        color:yellow;
+    }
+    
+    
+    #email{
+        padding: 20px 222px 20px 9px;
+    }
+    body{
+            text-align: center;
+        }
+
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            /* top: 40%;
+            bottom: 10%;
+            /* right: 60%; */
+            /* left: 34%;
+            position: absolute;
+        }
+
+        th {
+            border: 2px solid black;
+            border-collapse: collapse;
+            background-color: lightblue;
+            text-align: center;
+            padding: 10px;
+        }
+
+       
+        table,
+        td,
+        tr {
+            border: 2px black solid;
+            padding: 0px;
+            border-collapse: collapse;
+            filter: blur(1px);  
+
+        } */ 
+</style>
+<section id="new contain">
+
+</section>
+<body>
+    
+    </table>
+    <script>
+        
+        
+        
+            fetch("http://localhost:8080/get-product", {
+                method: "GET",
+
+            }).then((Response) => {
+                return Response.json()
+            }
+        ).then(res=>{
+            console.log(res);
+            var tr='';
+            res.forEach(value => {
+                console.log(value.starrating)
+                let star;
+                switch (value.starrating) {
+                    case "1":
+                       star= ` <span  class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star "></span>
+<span class="fa fa-star "></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>`
+                        break;
+                        case "2":
+                       star= ` <span class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star checked " style="color:yellow ;"></span>
+<span class="fa fa-star "></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>`
+                        break;
+                        case "3":
+                       star= ` <span class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>`
+                        break;
+                        case "4":
+                       star= ` <span class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star checked " style="color:yellow ;"></span>
+<span class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star"></span>`
+                        break;
+                        case "5":
+                       star= ` <span class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star checked " style="color:yellow ;"></span>
+<span class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star checked" style="color:yellow ;"></span>
+<span class="fa fa-star checked" style="color:yellow ;"></span>`
+                        break;
+                    default:
+                    star= ` <span class="fa fa-star "></span>
+<span class="fa fa-star "></span>
+<span class="fa fa-star "></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>`
+                        break;
+                }
+                tr+=`
+                <div class="review">
+        <div class="card">
+            <h3 class="heading">
+${value.reviewer}
+            </h3>
+         <p class="description">
+            ${value.description}
+         </p> 
+           
+       <p class="stars">${star}</p>
+        </div>
+    </div>
+                `
+            }); 
+               document.getElementById("new contain").innerHTML=tr;
+            }
+        )
+        
+
+  
+//   getreviews();
+
+
+
+</script>
+</table>
+
+</html>
+          

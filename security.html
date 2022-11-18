@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Register page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/task.css'>
+
+</head>
+
+<body>
+    <form>
+        <nav>
+            <a class="a1" href="./security.html">SIGN UP</a>
+            <a class="a2" href="./securitylogin.html">LOG IN</a>
+        </nav><br>
+
+        <h3>Sign Up for free</h3><br>
+        <input id="input" type="name" placeholder="First name*">
+        <input id="input1" type="name" placeholder="Last name*"><br><br><br>
+        <input id="email" type="email" placeholder="Email address* "><br><br><br>
+        <input id="email1" type="password" placeholder="set a password*"><br><br><br>
+        <button id="sign" onclick="signup()" type="submit">GET STARTED</button>
+    </form>
+
+
+    <script>
+         var id =0;
+        function signup() {
+            
+            id++;
+            const firstname = document.getElementById("input").value;
+            const lastname = document.getElementById("input1").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("email1").value;
+            const name = { firstname: firstname, lastname, email, password: password, id:id};
+            event.preventDefault();
+            console.log(name);
+    fetch("http://localhost:8080/add-User", {
+
+                                method: "POST",
+                                body: JSON.stringify(name),
+                                headers: {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json",
+                                },
+                            }).then((Response) => Response.text()
+                            )
+                                .then((e) => {
+                                   
+                                     console.log(e); window.alert(e);
+                                    }) 
+                                
+                                }
+                                
+                            
+                
+                    
+                                
+                                
+            
+           
+        
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+
+body{
+   color: white; 
+    /* text-align: center;  */
+    width: 50%;
+    height: 50%;
+}
+form {
+    top: 46%;
+    left: 48%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    padding: 37px 14px 36px 16px;
+     
+    background:linear-gradient(180deg, #213b52 0%, #213c54 35%, #204564 100%);
+    
+}
+a{
+    text-decoration: none;
+    text-align: center;
+    border:transparent 1px solid;
+    background-color:mediumseagreen;
+    padding: 9px 60px 9px 78px;
+    color: white;
+}
+.a2{
+    text-align: center;
+    border:transparent 1px solid;
+    background-color: gray;
+    color: rgb(214, 209, 209);
+}
+#input{
+    padding: 5px 21px 5px 9px;
+    background:linear-gradient(180deg, #213b52 0%, #213c54 35%, #204564 100%);
+    color: white !important;
+    border:grey 2px solid;
+    
+}
+#input1{
+    padding: 5px 21px 5px 9px;
+    background:linear-gradient(180deg, #213b52 0%, #213c54 35%, #204564 100%);
+    color: white !important;
+    border:grey 2px solid;
+    
+}
+#email{
+    padding: 5px 222px 5px 9px; 
+    background:linear-gradient(180deg, #213b52 0%, #213c54 35%, #204564 100%);
+    place-content:white ; 
+    border:grey 2px solid;
+     
+}
+#email1,#email2{
+    padding: 5px 222px 5px 9px; 
+    background:linear-gradient(180deg, #213b52 0%, #213c54 35%, #204564 100%);
+    place-content:white ; 
+    border:grey 2px solid;
+     
+}
+h3{
+    text-align: center;
+    font-size: 20px;
+}
+#sign{
+    padding: 10px 122px 10px 139px;
+    color: white;
+    background-color:mediumseagreen !important;
+    font-size: 18px;
+   font-weight: bolder ;
+}
+::placeholder{
+    color: rgb(214, 209, 209);
+}
